@@ -1,2 +1,16 @@
-# Project exclude paths
-/target/
+# IntelliJ
+.idea/
+
+# Maven
+target/
+
+# macOS
+.DS_Store
+
+# Environment / secrets
+.env
+.env.*
+*.key
+*.pem
+service-account*.json
+credentials.json
