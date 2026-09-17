@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>24/7 Intelligent Code Reviewer</title>
+
+  <link
+          rel="stylesheet"
+          href="/styles.css?v=3"
+  >
+</head>
+
+<body>
+
+<header class="topbar">
+
+  <div class="brand">
+
+    <div class="brand-icon">
+      ✦
+    </div>
+
+    <div>
+      <div class="brand-title">
+        Intelligent Code Reviewer
+      </div>
+
+      <div class="brand-subtitle">
+        AI-powered code quality intelligence
+      </div>
+    </div>
+
+  </div>
+
+  <div class="topbar-right">
+
+    <div
+            id="userInfo"
+            class="user-info hidden"
+    >
+    </div>
+
+    <button
+            id="loginButton"
+            class="secondary-button"
+            type="button"
+    >
+      Sign in with Google
+    </button>
+
+    <button
+            id="logoutButton"
+            class="secondary-button hidden"
+            type="button"
+    >
+      Sign out
+    </button>
+
+  </div>
+
+</header>
+
+
+<main id="app" class="main-container">
+
+  <!-- SIGNED OUT -->
+
+  <section
+          id="signedOut"
+          class="hero-section"
+  >
+
+    <div class="hero-badge">
+      ✨ AI CODE INTELLIGENCE
+    </div>
+
+    <h1 class="hero-title">
+      Your code.
+      <span>Reviewed intelligently.</span>
+    </h1>
+
+    <p class="hero-description">
+      Get actionable feedback on bugs, security,
+      performance, architecture and optimization
+      with explainable AI-powered scoring.
+    </p>
+
+    <button
+            id="heroLoginButton"
+            class="primary-button hero-button"
+            type="button"
+    >
+      Start reviewing code
+      <span>→</span>
+    </button>
+
+    <div class="hero-features">
+
+      <div class="hero-feature">
+        <div class="feature-icon">🔐</div>
+        <div>
+          <strong>Secure</strong>
+          <span>Authenticated reviews</span>
+        </div>
+      </div>
+
+      <div class="hero-feature">
+        <div class="feature-icon">🧠</div>
+        <div>
+          <strong>AI powered</strong>
+          <span>Deep code reasoning</span>
+        </div>
+      </div>
+
+      <div class="hero-feature">
+        <div class="feature-icon">📈</div>
+        <div>
+          <strong>Track growth</strong>
+          <span>Historical progress</span>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- MAIN REVIEW AREA -->
+
+  <section
+          id="reviewConsole"
+          class="review-console hidden"
+  >
+
+    <div class="section-header">
+
+      <div>
+
+        <div class="eyebrow">
+          CODE REVIEW
+        </div>
+
+        <h2>
+          Analyze your code
+        </h2>
+
+        <p>
+          Paste your source code below and get
+          a comprehensive AI review.
+        </p>
+
+      </div>
+
+      <div class="security-pill">
+        🔒 Code is never executed
+      </div>
+
+    </div>
+
+
+    <!-- CONTROLS -->
+
+    <div class="controls-row">
+
+      <div class="field-group">
+
+        <label for="language">
+          Programming language
+        </label>
+
+        <select id="language">
+
+          <option value="auto">
+            Auto Detect
+          </option>
+
+          <option value="java">
+            Java
+          </option>
+
+          <option value="python">
+            Python
+          </option>
+
+          <option value="javascript">
+            JavaScript
+          </option>
+
+          <option value="typescript">
+            TypeScript
+          </option>
+
+          <option value="cpp">
+            C++
+          </option>
+
+          <option value="c">
+            C
+          </option>
+
+          <option value="csharp">
+            C#
+          </option>
+
+          <option value="go">
+            Go
+          </option>
+
+          <option value="rust">
+            Rust
+          </option>
+
+          <option value="kotlin">
+            Kotlin
+          </option>
+
+          <option value="swift">
+            Swift
+          </option>
+
+          <option value="php">
+            PHP
+          </option>
+
+          <option value="sql">
+            SQL
+          </option>
+
+          <option value="html">
+            HTML
+          </option>
+
+          <option value="css">
+            CSS
+          </option>
+
+        </select>
+
+        <div
+                id="languageHint"
+                class="language-hint"
+        >
+          Language will be detected automatically.
+        </div>
+
+      </div>
+
+
+      <div class="field-group review-mode-group">
+
+        <label for="reviewMode">
+          Review focus
+        </label>
+
+        <select id="reviewMode">
+
+          <option value="full">
+            Full Review
+          </option>
+
+          <option value="security">
+            Security
+          </option>
+
+          <option value="performance">
+            Performance
+          </option>
+
+          <option value="architecture">
+            Architecture
+          </option>
+
+          <option value="clean-code">
+            Clean Code
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+
+    <!-- CODE EDITOR -->
+
+    <div class="code-editor-wrapper">
+
+      <div class="editor-header">
+
+        <div class="editor-title">
+
+          <span class="editor-dot"></span>
+
+          <span class="editor-dot"></span>
+
+          <span class="editor-dot"></span>
+
+          <span class="editor-name">
+                        source-code
+                    </span>
+
+        </div>
+
+        <div
+                id="characterCount"
+                class="character-count"
+        >
+          0 / 20,000
+        </div>
+
+      </div>
+
+
+      <textarea
+              id="codeInput"
+              class="code-editor"
+              placeholder="// Paste your code here...
+
+// Example:
+// public class UserService {
+//     ...
+// }"
+              spellcheck="false"
+      ></textarea>
+
+    </div>
+
+
+    <!-- ACTIONS -->
+
+    <div class="review-actions">
+
+      <div class="review-info">
+        <span>💡</span>
+        AI checks bugs, security, performance,
+        architecture and optimization.
+      </div>
+
+      <button
+              id="reviewButton"
+              class="primary-button review-button"
+              type="button"
+      >
+        <span>Review code</span>
+        <span class="button-arrow">→</span>
+      </button>
+
+    </div>
+
+
+    <!-- LOADING -->
+
+    <section
+            id="loading"
+            class="loading-card hidden"
+    >
+
+      <div class="loading-spinner"></div>
+
+      <div>
+
+        <strong>
+          Reviewing your code...
+        </strong>
+
+        <p>
+          Gemini is analyzing your code and
+          comparing it with historical review patterns.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- RESULT -->
+
+    <section
+            id="result"
+            class="result-section hidden"
+    >
+
+      <div class="result-header">
+
+        <div>
+
+          <div class="eyebrow">
+            REVIEW COMPLETE
+          </div>
+
+          <h2>
+            Your code review
+          </h2>
+
+        </div>
+
+        <div
+                id="cachedBadge"
+                class="cached-badge hidden"
+        >
+          ⚡ Cached review
+        </div>
+
+      </div>
+
+
+      <!-- RESULT GRID -->
+
+      <div class="result-grid">
+
+        <!-- SCORE -->
+
+        <div class="score-card">
+
+          <div class="score-card-label">
+            CODE QUALITY
+          </div>
+
+          <div
+                  id="rating"
+                  class="score-number"
+          >
+            —
+          </div>
+
+          <div class="score-out-of">
+            / 10
+          </div>
+
+          <div
+                  id="scoreLabel"
+                  class="score-label"
+          >
+            Analyzing
+          </div>
+
+          <div class="score-ring">
+
+            <svg
+                    viewBox="0 0 120 120"
+                    class="score-svg"
+            >
+
+              <circle
+                      class="score-ring-background"
+                      cx="60"
+                      cy="60"
+                      r="50"
+              ></circle>
+
+              <circle
+                      id="scoreProgress"
+                      class="score-ring-progress"
+                      cx="60"
+                      cy="60"
+                      r="50"
+              ></circle>
+
+            </svg>
+
+          </div>
+
+        </div>
+
+
+        <!-- SUMMARY -->
+
+        <div class="summary-card">
+
+          <div class="card-heading">
+            Review summary
+          </div>
+
+          <div
+                  id="summary"
+                  class="summary-text"
+          >
+          </div>
+
+          <div class="summary-meta">
+
+            <div>
+              <span>Language</span>
+              <strong id="resultLanguage">
+                —
+              </strong>
+            </div>
+
+            <div>
+              <span>Findings</span>
+              <strong id="findingTotal">
+                0
+              </strong>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- SCORE BREAKDOWN -->
+
+      <div class="score-breakdown-card">
+
+        <div class="card-heading-row">
+
+          <div>
+
+            <div class="card-heading">
+              Score breakdown
+            </div>
+
+            <div class="card-subheading">
+              Explainable deterministic scoring
+            </div>
+
+          </div>
+
+          <div class="score-engine-badge">
+            ⚙ Score Engine
+          </div>
+
+        </div>
+
+
+        <div class="severity-grid">
+
+          <div class="severity-item critical">
+            <span>Critical</span>
+            <strong id="criticalCount">0</strong>
+          </div>
+
+          <div class="severity-item high">
+            <span>High</span>
+            <strong id="highCount">0</strong>
+          </div>
+
+          <div class="severity-item medium">
+            <span>Medium</span>
+            <strong id="mediumCount">0</strong>
+          </div>
+
+          <div class="severity-item low">
+            <span>Low</span>
+            <strong id="lowCount">0</strong>
+          </div>
+
+          <div class="severity-item info">
+            <span>Info</span>
+            <strong id="infoCount">0</strong>
+          </div>
+
+        </div>
+
+
+        <div
+                id="scoreExplanation"
+                class="score-explanation"
+        >
+        </div>
+
+
+        <div class="category-section">
+
+          <div class="category-title">
+            Category scores
+          </div>
+
+          <div
+                  id="categoryScores"
+                  class="category-scores"
+          >
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- FINDINGS -->
+
+      <div class="findings-section">
+
+        <div class="section-heading-row">
+
+          <div>
+
+            <div class="eyebrow">
+              FINDINGS
+            </div>
+
+            <h3>
+              What we found
+            </h3>
+
+          </div>
+
+          <div
+                  id="findingCountBadge"
+                  class="finding-count-badge"
+          >
+            0 findings
+          </div>
+
+        </div>
+
+
+        <div
+                id="findings"
+                class="findings-list"
+        >
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- GROWTH -->
+
+    <section
+            id="growth"
+            class="growth-section hidden"
+    >
+
+      <div class="section-heading-row">
+
+        <div>
+
+          <div class="eyebrow">
+            DEVELOPER GROWTH
+          </div>
+
+          <h2>
+            Your progress
+          </h2>
+
+          <p>
+            Track how your code quality changes
+            across reviews.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="stats-grid">
+
+        <div class="stat-card">
+
+                    <span class="stat-icon">
+                        ⭐
+                    </span>
+
+          <span class="stat-label">
+                        Best score
+                    </span>
+
+          <strong id="bestScore">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="stat-card">
+
+                    <span class="stat-icon">
+                        📊
+                    </span>
+
+          <span class="stat-label">
+                        Reviews
+                    </span>
+
+          <strong id="reviewCount">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="stat-card">
+
+                    <span class="stat-icon">
+                        📈
+                    </span>
+
+          <span class="stat-label">
+                        Improvement
+                    </span>
+
+          <strong id="improvement">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="stat-card">
+
+                    <span class="stat-icon">
+                        🧠
+                    </span>
+
+          <span class="stat-label">
+                        Learning pattern
+                    </span>
+
+          <strong id="learningPattern">
+            —
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <!-- TREND -->
+
+      <div class="trend-card">
+
+        <div class="card-heading-row">
+
+          <div>
+
+            <div class="card-heading">
+              Quality trend
+            </div>
+
+            <div class="card-subheading">
+              Your review scores over time
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div
+                id="trendChart"
+                class="trend-chart"
+        >
+        </div>
+
+      </div>
+
+
+      <!-- HISTORY -->
+
+      <div class="history-card">
+
+        <div class="card-heading">
+          Review history
+        </div>
+
+        <div
+                id="historyList"
+                class="history-list"
+        >
+        </div>
+
+      </div>
+
+    </section>
+
+  </section>
+
+</main>
+
+
+<footer class="footer">
+
+  <div>
+    Google Cloud · Cloud Run · Gemini API · Firestore
+  </div>
+
+  <div>
+    24/7 Intelligent Code Reviewer
+  </div>
+
+</footer>
+
+
+<script type="module" src="/app.js?v=3"></script>
+
+</body>
+</html>

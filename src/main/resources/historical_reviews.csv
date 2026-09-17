@@ -1,0 +1,11 @@
+id,type,description
+1,formatting,Avoid single-character variable names — they hurt readability
+2,performance,Cache repeated database lookups inside the request loop
+3,security,Never interpolate raw user input directly into SQL queries
+4,security,Validate and sanitize all external input before using it
+5,performance,Avoid N+1 queries; batch or join related lookups
+6,architecture,Separate business logic from I/O and framework-specific code
+7,formatting,Keep functions short and focused on a single responsibility
+8,security,Do not log secrets, tokens, or passwords
+9,optimization,Reuse compiled regexes and other expensive objects instead of rebuilding them each call
+10,architecture,Handle errors explicitly; never silently swallow exceptions
